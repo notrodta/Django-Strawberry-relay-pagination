@@ -1,11 +1,11 @@
 import strawberry
-import strawberry_django
+import strawberry_django 
+from strawberry_django.relay import DjangoListConnection
 from myapp.types import BookType
-from myapp.models import Book
-from typing import List
 
 @strawberry.type
 class Query:
-    books: List[BookType] = strawberry_django.field()
+    # books: ListConnectionWithTotalCount[BookType] = strawberry_django.field()
+    books: strawberry.relay.ListConnection[BookType] = strawberry_django.connection()
 
 schema = strawberry.Schema(query=Query)
